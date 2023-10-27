@@ -42,9 +42,9 @@
 
 static OCTraceLogger * s_logger = NULL;
 static const char * s_skip_image_names[] = {
-    "WeChat",
+//    "Foundation",
     "demo",
-    "IPAPatch",
+//    "liblog_network",
     NULL,
 };
 
@@ -122,7 +122,7 @@ void * __hook_callback_pre(id self, SEL op, intptr_t arg0, intptr_t arg1) {
 
 extern "C"
 void  __hook_callback_post(id self, SEL op) {
-//    fprintf(stderr, "post self :%p, op:%s\n", self, (const char *)op);
+    fprintf(stderr, "post self :%p, op:%s\n", self, (const char *)op);
     if (s_logger) {
         s_logger->logAfterCallee((intptr_t)self, (intptr_t)op);
     }
@@ -133,7 +133,6 @@ void  __hook_callback_post(id self, SEL op) {
 #if  __LP64__
 __attribute__((naked))
 static id new_objc_msgSend(id self, SEL op) {
-    
     __asm__
     __volatile__ (
                   "stp fp, lr, [sp, #-16]!;\n"

@@ -19,6 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"https://www.baidu.com"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }] resume];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -32,6 +35,8 @@
 -(IBAction)onButton:(UIButton *)button {
     self.label.text = @"hello!";
     [[OCTraceTest shareInstance] test];
+
+
 }
 
 
