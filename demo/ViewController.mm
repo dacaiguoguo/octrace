@@ -10,18 +10,24 @@
 
 #import "ViewController.h"
 #import "OCTraceTest.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
-
+- (void)showFlutter {
+    FlutterEngine *fe = ((AppDelegate *)UIApplication.sharedApplication.delegate).flutterEngine;
+    FlutterViewController *fc = [[FlutterViewController alloc] initWithEngine:fe nibName:nil bundle:nil];
+    [self.navigationController pushViewController:fc animated:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"https://www.baidu.com"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-    }] resume];
+    self.title = @"fsdlfj";
+//    [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:@"https://www.baidu.com"] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+////        NSLog(@"%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+//    }] resume];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -35,7 +41,7 @@
 -(IBAction)onButton:(UIButton *)button {
     self.label.text = @"hello!";
     [[OCTraceTest shareInstance] test];
-
+    [self showFlutter];
 
 }
 
