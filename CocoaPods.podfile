@@ -1,0 +1,14 @@
+platform :ios, '13.0'
+flutter_application_path = '../base_flutter'
+load File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')
+
+
+target 'demo' do
+  install_all_flutter_pods(flutter_application_path)
+  use_frameworks!
+  pod 'AFNetworking', '~> 4.0'
+
+  post_install do |installer|
+    flutter_post_install(installer) if defined?(flutter_post_install)
+  end
+end

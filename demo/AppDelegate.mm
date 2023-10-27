@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h>
 #include "OCTrace.h"
 #include "OCTraceLocalLogger.h"
 
@@ -24,7 +24,12 @@
     
     OCTraceInit(logger);
     
-    return YES;
+    self.flutterEngine = [[FlutterEngine alloc] initWithName:@"my flutter engine"];
+    // Runs the default Dart entrypoint with a default Flutter route.
+    [self.flutterEngine run];
+    // Connects plugins with iOS platform code to this app.
+    [GeneratedPluginRegistrant registerWithRegistry:self.flutterEngine];
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 
