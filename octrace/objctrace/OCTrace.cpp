@@ -94,7 +94,12 @@ static bool __skip_class_name(const char * name) {
 
 extern "C"
 void * __hook_callback_pre(id self, SEL op, intptr_t arg0, intptr_t arg1) {
+
+
     const char* class_name = (char*) object_getClassName( self );
+    const char* op_name = (const char*) op;
+
+    fprintf(stderr, "[%ld] [%s %s] -> \n", (long)getpid(), class_name, op_name);
     Class clazz = objc_lookUpClass(class_name);
     IMP imp = method_getImplementation(class_getInstanceMethod(clazz, op));
     if (!imp) {
