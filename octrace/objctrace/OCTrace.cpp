@@ -135,7 +135,7 @@ void  __hook_callback_post(id self, SEL op) {
 }
 
 
-#if  __LP64__
+#if  TARGET_CPU_ARM64
 __attribute__((naked))
 static id new_objc_msgSend(id self, SEL op) {
     __asm__
@@ -247,7 +247,7 @@ static id new_objc_msgSend(id self, SEL op) {
 
 int OCTraceInit(OCTraceLogger * logger) {
     
-#if 1
+#if TARGET_CPU_ARM64
     OCTraceImageListInit();
     s_image_list.clear();
     for(int i = 0; s_skip_image_names[i] != NULL; i++) {
@@ -257,7 +257,8 @@ int OCTraceInit(OCTraceLogger * logger) {
             s_image_list.insert(s_image_list.end(), image);
         }
     }
-    
+#else
+    return 0;
 #endif
     s_logger = logger;
     
